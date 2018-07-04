@@ -25,7 +25,7 @@ class QuotesSpider(scrapy.Spider):
     #     self.log(f'saved file {filename}')
 
     def parse(self, response):
-        for quote in response.css('div.quote'):
+        for quote in response.xpath('//div[contains(@class, "quote")]'):
             yield {
                 'text': quote.xpath('span[contains(@class, "text")]/text()').extract_first(),
                 'author': quote.xpath('span/small[contains(@class, "author")]/text()').extract_first(),
